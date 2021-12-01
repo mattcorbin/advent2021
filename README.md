@@ -1,2 +1,2 @@
-# advent
-advent of code template repository
+# advent2021
+advent of code 2021 solutions
