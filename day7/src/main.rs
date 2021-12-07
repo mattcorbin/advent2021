@@ -36,7 +36,7 @@ fn part2(input: &str) {
         }
         min_fuel = min(min_fuel, fuel_required)
     }
-    println!("part1: {}", min_fuel);
+    println!("part2: {}", min_fuel);
 }
 
 fn main() {
