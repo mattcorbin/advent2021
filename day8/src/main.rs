@@ -140,7 +140,7 @@ fn part2(input: &str) {
         for input in &inputs {
             let i = input.chars().sorted().collect::<String>();
             if i.len() == 5 {
-                if i != wires_used[3] && get_text_diff(&i, &wires_used[6]).len() == 1 {
+                if get_text_diff(&i, &wires_used[6]).len() == 1 {
                     wires_used[5] = i;
                 }
             }
