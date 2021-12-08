@@ -1,5 +1,4 @@
 use itertools::Itertools;
-use std::collections::HashMap;
 use std::fs;
 
 fn part1(input: &str) {
@@ -67,7 +66,6 @@ fn part2(input: &str) {
     let mut total: u64 = 0;
     for line in input.lines() {
         let (inputs, outputs) = parse_line(line);
-        let mut wire_map: HashMap<char, char> = HashMap::with_capacity(7);
         let mut wires_used: [String; 10] = [
             "".to_string(),
             "".to_string(),
@@ -91,9 +89,10 @@ fn part2(input: &str) {
                 _ => unreachable!(),
             }
         }
-        wire_map.insert('a', get_single_char_diff(&wires_used[7], &wires_used[1]));
+        let top_row = get_single_char_diff(&wires_used[7], &wires_used[1]);
+        let mut bottom_row = '0';
         let mut mostly_nine = String::new();
-        mostly_nine.push(*wire_map.get(&'a').unwrap());
+        mostly_nine.push(top_row);
         for c in wires_used[4].chars() {
             mostly_nine.push(c);
         }
@@ -101,22 +100,20 @@ fn part2(input: &str) {
             let i = input.chars().sorted().collect::<String>();
             if i.len() == 6 {
                 if get_text_diff(&i, &mostly_nine).len() == 1 {
-                    wire_map.insert('g', get_single_char_diff(&i, &mostly_nine));
+                    bottom_row = get_single_char_diff(&i, &mostly_nine);
                     wires_used[9] = i;
                 }
             }
         }
         let mut mostly_three = String::new();
-        mostly_three.push(*wire_map.get(&'a').unwrap());
-        mostly_three.push(*wire_map.get(&'g').unwrap());
-        for c in wires_used[1].chars() {
+        mostly_three.push(bottom_row);
+        for c in wires_used[7].chars() {
             mostly_three.push(c);
         }
         for input in &inputs {
             let i = input.chars().sorted().collect::<String>();
             if i.len() == 5 {
                 if get_text_diff(&i, &mostly_three).len() == 1 {
-                    wire_map.insert('d', get_single_char_diff(&i, &mostly_three));
                     wires_used[3] = i;
                 }
             }
