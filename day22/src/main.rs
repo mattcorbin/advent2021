@@ -243,9 +243,6 @@ fn part2(input: &str) {
 }
 
 fn main() {
-    let test = fs::read_to_string("test.txt").expect("Unable to read input");
-    part1(&test);
-    part2(&test);
     let input = fs::read_to_string("input.txt").expect("Unable to read input");
     part1(&input);
     part2(&input);
